@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <ThingDef Name="ChemfuelConverterBase" ParentName="BuildingBase" Abstract="true">
+        <inspectorTabs>
+            <li>ITab_Storage</li>
+        </inspectorTabs>
+        <costList>
+            <Steel>15</Steel>
+        </costList>
+        <thingClass>Building_Storage</thingClass>
+        <category>Building</category>
+        <tickerType>Normal</tickerType>
+        <rotatable>false</rotatable>
+        <neverMultiSelect>true</neverMultiSelect>
+        <designationCategory>Rimefeller</designationCategory>
+        <surfaceType>Item</surfaceType>
+        <constructEffect>ConstructMetal</constructEffect>
+        <researchPrerequisites>
+            <li>BiofuelRefining</li>
+            <li>OilDrilling</li>
+        </researchPrerequisites>
+        <building>
+            <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+            <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+            <fixedStorageSettings>
+                <priority>Important</priority>
+                <filter>
+                    <thingDefs>
+                        <li>Chemfuel</li>
+                    </thingDefs>
+                </filter>
+            </fixedStorageSettings>
+            <defaultStorageSettings>
+                <priority>Important</priority>
+                <filter>
+                    <thingDefs>
+                        <li>Chemfuel</li>
+                    </thingDefs>
+                </filter>
+            </defaultStorageSettings>
+        </building>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
+    </ThingDef>
+
+    <ThingDef ParentName="ChemfuelConverterBase">
+        <defName>ChemfuelConverterVTR</defName>
+        <label>Chemfuel Converter VTR</label>
+        <description>Converts Vanilla Expanded Chemfuel to Rimefeller Chemfuel</description>
+        
+        <graphicData>
+            <texPath>Things/Building/Production/ChemfuelTap</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <damageData>
+                <cornerTL>Damage/Corner</cornerTL>
+                <cornerTR>Damage/Corner</cornerTR>
+                <cornerBL>Damage/Corner</cornerBL>
+                <cornerBR>Damage/Corner</cornerBR>
+            </damageData>
+            <drawRotated>false</drawRotated>
+            <allowFlip>false</allowFlip>
+        </graphicData>
+        <comps>
+            <li Class="Rimefeller.CompProperties_Siphon">
+            </li>
+            <li Class="CompProperties_Flickable" />
+            <li
+                Class="PipeSystem.CompProperties_ConvertResourceToThing">
+                <pipeNet>VCHE_ChemfuelNet</pipeNet>
+                <thing>Chemfuel</thing>
+            </li>
+        </comps>
+    </ThingDef>
+
+    <ThingDef ParentName="ChemfuelConverterBase">
+        <defName>ChemfuelConverterRTV</defName>
+        <label>Chemfuel Converter RTV</label>
+        <description>Converts Rimefeller Chemfuel to Vanilla Expanded Chemfuel</description>
+        <graphicData>
+            <texPath>Things/Building/Production/ChemfuelDrain</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <damageData>
+                <cornerTL>Damage/Corner</cornerTL>
+                <cornerTR>Damage/Corner</cornerTR>
+                <cornerBL>Damage/Corner</cornerBL>
+                <cornerBR>Damage/Corner</cornerBR>
+            </damageData>
+            <drawRotated>false</drawRotated>
+            <allowFlip>false</allowFlip>
+        </graphicData>
+        <comps>
+            <li Class="Rimefeller.CompProperties_FuelPump">
+                <pumpRate>25</pumpRate>
+              </li>
+            <li Class="CompProperties_Flickable" />
+            <li Class="PipeSystem.CompProperties_ConvertThingToResource">
+                <pipeNet>VCHE_ChemfuelNet</pipeNet>
+                <thing>Chemfuel</thing>
+              </li>
+        </comps>
+    </ThingDef>
+</Defs>
